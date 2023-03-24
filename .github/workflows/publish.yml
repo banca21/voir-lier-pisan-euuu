@@ -1,21 +1,20 @@
-name: lier aing
-on:
-  release:
-    types: [created]
+name: "publish npm"
+
+on: push
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies and build 🔧
-        run: npm ci && npm run build
-      - name: kudu bisa
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v2
+            - name: node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 12
+                  registry-url: https://registry.npmjs.org
+            - name: publish
+              run: moalca
+              working-directory: README.md
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
